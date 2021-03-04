@@ -66,7 +66,7 @@ class NotificationService {
   // use a platform channel to resolve an Android drawable resource to a URI.
   // Calls made over this channel is handled by the app
   static Future<String> drawableToUri(String drawable) async {
-    final String imageUri = await _channel.invokeMethod('drawableToUri', [drawable]);
+    final String imageUri = await _channel.invokeMethod('drawableToUri', drawable);
     return imageUri;
   }
 
@@ -77,7 +77,8 @@ class NotificationService {
     return _packageName;
   }
 
-  Future<void> newNotification(String title, String body, bool vibration, int hashCode,
+  Future<void> newNotification(String channelId, String channelName, String channelDescription, String title,
+      String body, bool vibration, int hashCode,
       {bool showProgress = false, int maxProgress = 0, int progress = 0}) async {
     // Define vibration pattern
     var vibrationPattern = Int64List(4);
@@ -86,9 +87,7 @@ class NotificationService {
     vibrationPattern[2] = 5000;
     vibrationPattern[3] = 2000;
 
-    final channelName = 'Battery Notification Service';
-
-    var androidChannel = AndroidNotificationDetails(channelName, channelName, channelName,
+    var androidChannel = AndroidNotificationDetails(channelId, channelName, channelDescription,
         //sound: RawResourceAndroidNotificationSound('slow_spring_board'),
         importance: Importance.max,
         priority: Priority.high,
@@ -120,13 +119,15 @@ class NotificationService {
     }
   }
 
-  Future<void> showSoundUriNotification(String title, String body, bool vibration, int hashCode,
-      {bool showProgress = false, int maxProgress = 0, int progress = 0}) async {
+  Future<void> showSoundUriNotification(String channelId, String channelName, String channelDescription, String title,
+      String body, bool vibration, int hashCode,
+      {bool showProgress = false, int maxProgress = 0, int progress = 0, String soundUri}) async {
     /// this calls a method over a platform channel implemented within the
     /// app to return the Uri for the default alarm sound and uses
     /// as the notification sound
     final String alarmUri = await getAlarmUri();
-    final UriAndroidNotificationSound uriSound = UriAndroidNotificationSound(alarmUri);
+    print(soundUri);
+    final UriAndroidNotificationSound uriSound = UriAndroidNotificationSound(soundUri ?? alarmUri);
 
     // Define vibration pattern
     var vibrationPattern = Int64List(4);
@@ -135,9 +136,7 @@ class NotificationService {
     vibrationPattern[2] = 5000;
     vibrationPattern[3] = 2000;
 
-    final channelName = 'Battery Notification Service';
-
-    var androidChannel = AndroidNotificationDetails(channelName, channelName, channelName,
+    var androidChannel = AndroidNotificationDetails(channelId, channelName, channelDescription,
         //sound: RawResourceAndroidNotificationSound('slow_spring_board'),
         importance: Importance.max,
         priority: Priority.high,
@@ -147,10 +146,11 @@ class NotificationService {
         vibrationPattern: vibration ? vibrationPattern : null,
         styleInformation: const DefaultStyleInformation(true, true),
         playSound: true,
+        onlyAlertOnce: false,
         sound: uriSound,
         enableLights: true,
         enableVibration: vibration,
-        color: const Color.fromARGB(255, 155, 223, 255),
+        color: const Color.fromARGB(255, 255, 123, 255),
         ledColor: const Color.fromARGB(237, 25, 298, 0),
         ledOnMs: 1000,
         ledOffMs: 500);

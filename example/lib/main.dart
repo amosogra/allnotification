@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -22,6 +25,7 @@ class _MyAppState extends State<MyApp> {
   String _drawableUri = 'Unknown';
   String _currentAppPackageName = 'Unknown';
 
+  Timer timer;
   @override
   void initState() {
     super.initState();
@@ -100,6 +104,55 @@ class _MyAppState extends State<MyApp> {
       _drawableUri = drawableUri;
       _currentAppPackageName = currentAppPackageName;
     });
+
+    final channelName1 = 'Battery Notification Service';
+    final channelName2 = 'Battery Notification Service2';
+
+    openFileExplorerForAudio().then((path) async {
+      Uri uri = Uri.file(path, windows: false);
+
+      print('Uri path: ${uri.path}');
+      print('Uri ToFilePath: ${uri.toFilePath(windows: false)}');
+      print('Uri ToString: ${uri.toString()}');
+      print('Uri IsAbsolute: ${uri.isAbsolute}');
+ 
+      await NotificationService().newNotification(channelName1, channelName1, channelName1, "HeadsUp",
+          "Unplug/Plug your device, your battery has reached its charging/discharging limit", true, 0,
+          maxProgress: 100, progress: 50, showProgress: true);
+
+      timer = Timer.periodic(Duration(seconds: 10), (timer) async {
+        print("Timer is firing another notification..");
+        await NotificationService().showSoundUriNotification(channelName2, channelName2, channelName2, "Battery Alert!",
+            "Unplug/Plug your device, your battery has reached its charging/discharging limit", true, 0,
+            maxProgress: 100, progress: 50, showProgress: false, soundUri: uri.toString());
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  Future<String> openFileExplorerForAudio() async {
+    String _fileName;
+    List<PlatformFile> _paths;
+    try {
+      _paths = (await FilePicker.platform.pickFiles(
+        type: FileType.audio,
+        allowMultiple: false,
+      ))
+          ?.files;
+    } on PlatformException catch (e) {
+      print("Unsupported operation" + e.toString());
+    } catch (ex) {
+      print(ex);
+    }
+
+    _fileName = _paths != null ? _paths.map((platformFile) => platformFile.name).toList()[0] : '...';
+    final path = _paths != null ? _paths.map((e) => e.path).toList()[0] : null;
+    return path;
   }
 
   @override

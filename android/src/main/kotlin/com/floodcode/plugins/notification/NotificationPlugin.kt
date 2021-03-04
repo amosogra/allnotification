@@ -36,7 +36,7 @@ class NotificationPlugin: FlutterPlugin, MethodCallHandler {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
     } 
     else if ("drawableToUri" == call.method) {
-      val resourceId = context.resources.getIdentifier(call.arguments[0] as String, "drawable", context.packageName)
+      val resourceId = context.resources.getIdentifier(call.arguments as String, "drawable", context.packageName)
       result.success(resourceToUriString(context, resourceId))
     }
     else if ("getCurrentAppPackageName" == call.method) {
