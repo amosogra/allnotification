@@ -76,9 +76,21 @@ class AllNotification {
     return _packageName;
   }
 
+  FlutterLocalNotificationsPlugin get local => plugin;
+
   Future<void> newNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
-      {bool indeterminateProgressBar = false, bool playSound = false, bool enableLights = true, Importance importance = Importance.defaultImportance, Priority priority = Priority.defaultPriority, bool showProgress = false, int maxProgress = 0, int progress = 0, int timeoutAfter, Color color = const Color.fromARGB(155, 155, 0, 255), Color ledColor = const Color.fromARGB(255, 255, 0, 0)}) async {
+      {bool indeterminateProgressBar = false,
+      bool playSound = false,
+      bool enableLights = true,
+      Importance importance = Importance.defaultImportance,
+      Priority priority = Priority.defaultPriority,
+      bool showProgress = false,
+      int maxProgress = 0,
+      int progress = 0,
+      int timeoutAfter,
+      Color color = const Color.fromARGB(155, 155, 0, 255),
+      Color ledColor = const Color.fromARGB(255, 255, 0, 0)}) async {
     // Define vibration pattern
     var vibrationPattern = Int64List(4);
     vibrationPattern[0] = 0;
@@ -94,7 +106,7 @@ class AllNotification {
         maxProgress: maxProgress,
         showProgress: showProgress,
         vibrationPattern: vibration ? vibrationPattern : null,
-        playSound:playSound,
+        playSound: playSound,
         timeoutAfter: timeoutAfter,
         indeterminate: indeterminateProgressBar,
         enableLights: enableLights,
@@ -122,7 +134,18 @@ class AllNotification {
 
   Future<void> showSoundUriNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
-      {bool indeterminateProgressBar = false, bool playSound = true, bool enableLights = true, Importance importance = Importance.defaultImportance, Priority priority = Priority.defaultPriority,  bool showProgress = false, int maxProgress = 0, int progress = 0, String soundUri, int timeoutAfter, Color color = const Color.fromARGB(255, 255, 123, 255), Color ledColor = const Color.fromARGB(237, 25, 298, 0)}) async {
+      {bool indeterminateProgressBar = false,
+      bool playSound = true,
+      bool enableLights = true,
+      Importance importance = Importance.defaultImportance,
+      Priority priority = Priority.defaultPriority,
+      bool showProgress = false,
+      int maxProgress = 0,
+      int progress = 0,
+      String soundUri,
+      int timeoutAfter,
+      Color color = const Color.fromARGB(255, 255, 123, 255),
+      Color ledColor = const Color.fromARGB(237, 25, 298, 0)}) async {
     /// this calls a method over a platform channel implemented within the
     /// app to return the Uri for the default alarm sound and uses
     /// as the notification sound
