@@ -13,3 +13,6 @@ Added options for importance, priority, onlyAlertOnce, timeoutAfter, enableLight
 
 * [1.0.3]
 Exposed the flutter_local_notification instance
+
+* [1.0.4]
+Updates for documentation
