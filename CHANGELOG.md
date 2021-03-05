@@ -16,3 +16,6 @@ Exposed the flutter_local_notification instance
 
 * [1.0.4]
 Updates for documentation
+
+* [1.0.5]
+Added option for autoCancel

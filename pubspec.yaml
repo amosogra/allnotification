@@ -1,6 +1,6 @@
 name: allnotification
 description: Displays notification with default ringtones & alarm, sets custom ringtones.
-version: 1.0.4
+version: 1.0.5
 homepage: https://github.com/amosogra/notification
 repository: https://github.com/amosogra/notification.git
 
