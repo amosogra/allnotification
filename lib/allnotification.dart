@@ -78,6 +78,8 @@ class AllNotification {
 
   FlutterLocalNotificationsPlugin get local => plugin;
 
+  //[Importance] and [Priority] can be accessed by importing the below package in your project like so: 
+  //import package:flutter_local_notifications/src/platform_specifics/android/enums.dart
   Future<void> newNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
       {bool indeterminateProgressBar = false,
