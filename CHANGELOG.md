@@ -19,3 +19,6 @@ Updates for documentation
 
 * [1.0.5]
 Added option for autoCancel
+
+* [1.0.6]
+Added option for usesChronometer
