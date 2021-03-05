@@ -78,7 +78,7 @@ class AllNotification {
 
   Future<void> newNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
-      {bool showProgress = false, int maxProgress = 0, int progress = 0}) async {
+      {bool playSound = false, bool showProgress = false, int maxProgress = 0, int progress = 0}) async {
     // Define vibration pattern
     var vibrationPattern = Int64List(4);
     vibrationPattern[0] = 0;
@@ -94,7 +94,7 @@ class AllNotification {
         maxProgress: maxProgress,
         showProgress: showProgress,
         vibrationPattern: vibration ? vibrationPattern : null,
-        playSound: true,
+        playSound:playSound,
         enableLights: true,
         enableVibration: vibration,
         color: const Color.fromARGB(255, 255, 0, 0),
