@@ -78,7 +78,7 @@ class AllNotification {
 
   Future<void> newNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
-      {bool playSound = false, bool showProgress = false, int maxProgress = 0, int progress = 0}) async {
+      {bool indeterminateProgressBar = false, bool playSound = false, bool enableLights = true, Importance importance = Importance.defaultImportance, Priority priority = Priority.defaultPriority, bool showProgress = false, int maxProgress = 0, int progress = 0, int timeoutAfter, Color color = const Color.fromARGB(155, 155, 0, 255), Color ledColor = const Color.fromARGB(255, 255, 0, 0)}) async {
     // Define vibration pattern
     var vibrationPattern = Int64List(4);
     vibrationPattern[0] = 0;
@@ -88,17 +88,19 @@ class AllNotification {
 
     var androidChannel = AndroidNotificationDetails(channelId, channelName, channelDescription,
         //sound: RawResourceAndroidNotificationSound('slow_spring_board'),
-        importance: Importance.max,
-        priority: Priority.high,
+        importance: importance,
+        priority: priority,
         progress: progress,
         maxProgress: maxProgress,
         showProgress: showProgress,
         vibrationPattern: vibration ? vibrationPattern : null,
         playSound:playSound,
-        enableLights: true,
+        timeoutAfter: timeoutAfter,
+        indeterminate: indeterminateProgressBar,
+        enableLights: enableLights,
         enableVibration: vibration,
-        color: const Color.fromARGB(255, 255, 0, 0),
-        ledColor: const Color.fromARGB(255, 255, 0, 0),
+        color: color,
+        ledColor: ledColor,
         ledOnMs: 1000,
         ledOffMs: 500);
 
@@ -120,7 +122,7 @@ class AllNotification {
 
   Future<void> showSoundUriNotification(String channelId, String channelName, String channelDescription, String title,
       String body, bool vibration, int hashCode,
-      {bool showProgress = false, int maxProgress = 0, int progress = 0, String soundUri}) async {
+      {bool indeterminateProgressBar = false, bool playSound = true, bool enableLights = true, Importance importance = Importance.defaultImportance, Priority priority = Priority.defaultPriority,  bool showProgress = false, int maxProgress = 0, int progress = 0, String soundUri, int timeoutAfter, Color color = const Color.fromARGB(255, 255, 123, 255), Color ledColor = const Color.fromARGB(237, 25, 298, 0)}) async {
     /// this calls a method over a platform channel implemented within the
     /// app to return the Uri for the default alarm sound and uses
     /// as the notification sound
@@ -136,20 +138,22 @@ class AllNotification {
 
     var androidChannel = AndroidNotificationDetails(channelId, channelName, channelDescription,
         //sound: RawResourceAndroidNotificationSound('slow_spring_board'),
-        importance: Importance.max,
-        priority: Priority.high,
+        importance: importance,
+        priority: priority,
         progress: progress,
         maxProgress: maxProgress,
         showProgress: showProgress,
         vibrationPattern: vibration ? vibrationPattern : null,
         styleInformation: const DefaultStyleInformation(true, true),
-        playSound: true,
+        playSound: playSound,
         onlyAlertOnce: false,
+        indeterminate: indeterminateProgressBar,
         sound: uriSound,
-        enableLights: true,
+        timeoutAfter: timeoutAfter,
+        enableLights: enableLights,
         enableVibration: vibration,
-        color: const Color.fromARGB(255, 255, 123, 255),
-        ledColor: const Color.fromARGB(237, 25, 298, 0),
+        color: color,
+        ledColor: ledColor,
         ledOnMs: 1000,
         ledOffMs: 500);
 
