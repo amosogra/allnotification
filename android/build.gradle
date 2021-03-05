@@ -1,4 +1,4 @@
-group 'com.floodcode.plugins.notification'
+group 'com.floodcode.plugins.allnotification'
 version '1.0-SNAPSHOT'
 
 buildscript {

@@ -1,4 +1,4 @@
-package com.floodcode.plugins.notification
+package com.floodcode.plugins.allnotification
 
 import androidx.annotation.NonNull
 
@@ -14,8 +14,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-/** NotificationPlugin */
-class NotificationPlugin: FlutterPlugin, MethodCallHandler {
+/** AllnotificationPlugin */
+class AllnotificationPlugin: FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -27,7 +27,7 @@ class NotificationPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     context = flutterPluginBinding.getApplicationContext()
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "notification")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "allnotification")
     channel.setMethodCallHandler(this)
   }
 

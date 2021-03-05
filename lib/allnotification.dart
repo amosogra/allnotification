@@ -7,18 +7,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 /// The service used to display notifications and handle callbacks when the user taps on the notification.
-///
 /// This is a singleton. Just call Notification() to get the singleton.
-class NotificationService {
-  static const MethodChannel _channel = const MethodChannel('notification');
+class AllNotification {
+  static const MethodChannel _channel = const MethodChannel('allnotification');
 
-  static final NotificationService _instance = NotificationService._internal();
+  static final AllNotification _instance = AllNotification._internal();
 
-  factory NotificationService() => _instance;
+  factory AllNotification() => _instance;
 
   FlutterLocalNotificationsPlugin plugin;
 
-  NotificationService._internal() {
+  AllNotification._internal() {
     final initializationSettings = InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'), iOS: IOSInitializationSettings());
 
@@ -126,7 +125,6 @@ class NotificationService {
     /// app to return the Uri for the default alarm sound and uses
     /// as the notification sound
     final String alarmUri = await getAlarmUri();
-    print(soundUri);
     final UriAndroidNotificationSound uriSound = UriAndroidNotificationSound(soundUri ?? alarmUri);
 
     // Define vibration pattern

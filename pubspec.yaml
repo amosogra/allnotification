@@ -1,6 +1,6 @@
-name: notification
+name: allnotification
 description: A flutter plugin project to display notification with system ringtone sounds or custom ringtones. Availabe only for android for now. This plugin can be called within flutter_isolate
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/amosogra/notification
 repository: https://github.com/amosogra/notification.git
 
@@ -28,10 +28,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.floodcode.plugins.notification
-        pluginClass: NotificationPlugin
+        package: com.floodcode.plugins.allnotification
+        pluginClass: AllnotificationPlugin
       ios:
-        pluginClass: NotificationPlugin
+        pluginClass: AllnotificationPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
