@@ -22,3 +22,7 @@ Added option for autoCancel
 
 * [1.0.6]
 Added option for usesChronometer
+
+* [1.0.7]
+Added channel to restart the app at the activity level
+
