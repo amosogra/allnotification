@@ -26,3 +26,6 @@ Added option for usesChronometer
 * [1.0.7]
 Added channel to restart the app at the activity level
 
+* [1.0.8]
+fix breaking changes in method channel
+

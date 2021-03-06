@@ -56,7 +56,7 @@ class AllnotificationPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     @JvmStatic
     fun registerWith(registrar: Registrar) {
       val channel = MethodChannel(registrar.messenger(), "flutter_restart")
-      channel.setMethodCallHandler(FlutterRestartPlugin())
+      channel.setMethodCallHandler(AllnotificationPlugin())
       context = registrar.context()
       activity = registrar.activity()
     }
